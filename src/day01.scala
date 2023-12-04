@@ -20,11 +20,12 @@ def part1(input: String): String =
         s"$firstDigit$lastDigit".toInt
 
     // Convert each line to its coordinates and sum all the coordinates
-    val result = input.linesIterator
-      .map(lineToCoordinates(_))
-      .sum
+    val result =
+      input.linesIterator
+        .map(lineToCoordinates(_))
+        .sum
     result.toString()
-    
+
 end part1
 
 /** The textual representation of digits. */
@@ -79,8 +80,9 @@ def part2(input: String): String =
     end lineToCoordinates
 
     // Process lines as in part1
-    val result = input.linesIterator
-      .map(lineToCoordinates(_))
-      .sum
+    val result =
+      input.linesIterator
+        .map(lineToCoordinates(_))
+        .sum
     result.toString()
 end part2
