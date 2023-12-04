@@ -17,7 +17,7 @@ default:
 [private]
 @ensure day part:
   {{ if day =~ 'day[01]\d$' {""} else {error("only admits day01 to day25")} }}
-  {{ if part =~ 'part[12]' {""} else {error("only runs part1 or part2")} }}
+  {{ if part =~ 'part[12][a-z]?' {""} else {error("only runs part1 or part2")} }}
 
 # running one quiz
 @run day part: (ensure day part) && (_run day part)

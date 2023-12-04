@@ -9,6 +9,9 @@ import inputs.Input.loadFileSync
 @main def part2: Unit =
   println(s"The solution is ${part2(loadInput())}")
 
+@main def part2b: Unit =
+  println(s"The solution is ${part2b(loadInput())}")
+
 def loadInput(): String = loadFileSync(s"$currentDir/../input/day01")
 
 def part1(input: String): String =
@@ -43,6 +46,7 @@ val stringDigitReprs = Map(
 
 /** All the string representation of digits, including the digits themselves. */
 val digitReprs = stringDigitReprs ++ (1 to 9).map(i => i.toString() -> i)
+val digits = digitReprs.keys.toList
 
 def part2(input: String): String =
     // A regex that matches any of the keys of `digitReprs`
@@ -86,3 +90,34 @@ def part2(input: String): String =
         .sum
     result.toString()
 end part2
+
+def part2b(input: String): String =
+
+    def lineToCoordinates(line: String): Int =
+
+        // Convert the string representations into actual digits and form the result
+
+        val firstDigit =
+          (for
+              lineTails <- line.tails
+              digitRepr <- digitReprs.keys
+              if lineTails.startsWith(digitRepr)
+          yield digitReprs(digitRepr)).next
+
+        val lastDigit =
+          (for
+              lineTails <- line.inits
+              digitRepr <- digitReprs.keys
+              if lineTails.endsWith(digitRepr)
+          yield digitReprs(digitRepr)).next
+
+        s"$firstDigit$lastDigit".toInt
+    end lineToCoordinates
+
+    // Process lines as in part1
+    val result =
+      input.linesIterator
+        .map(lineToCoordinates(_))
+        .sum
+    result.toString()
+end part2b
