@@ -31,5 +31,8 @@ metals.sbt
 .idea_modules
 /.worksheet/
 
-# scala-build
+# scala-cli
 .scala-build/
+
+# executables
+day??.part[12]
