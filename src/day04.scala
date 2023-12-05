@@ -30,6 +30,27 @@ def part1(input: String): String =
 
 end part1
 
+case  class ScratchCard(val wins: Int, var copies: Int = 1)
+
 def part2(input: String): String =
-  ???
+
+    val cards =
+      loadInput().linesIterator
+        .map: line =>
+            val (s"Card $id: $winning | $hand") = line: @unchecked
+            val winNumbers = getNumbers(winning)
+            val matches =
+              getNumbers(hand)
+                .filter(n => winNumbers.contains(n))
+                .length
+            ScratchCard(matches)
+        .toList
+
+    for (card, i) <- cards.zipWithIndex
+    do
+        for n <- 1 to card.wins
+        do cards(i+n).copies += card.copies
+      
+    cards.map(_.copies).sum.toString
+
 end part2
