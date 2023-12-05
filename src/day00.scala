@@ -9,7 +9,7 @@ import inputs.Input.loadFileSync
 @main def part2: Unit =
   println(s"The solution is ${part2(loadInput())}")
 
-def loadInput(): String = loadFileSync(s"$currentDir/../input/day01")
+def loadInput(): String = loadFileSync(s"$currentDir/../input/day00")
 
 def part1(input: String): String =
   ???

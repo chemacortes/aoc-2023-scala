@@ -57,5 +57,15 @@ def part1(input: String): String =
 end part1
 
 def part2(input: String): String =
-  ???
+    val all = findPartsAndSymbols(loadInput())
+    val numbers = all.collect { case n: PartNumber => n }
+    val gears = all.collect { case s: Symbol if s.sym == "*" => s }
+
+    gears
+      .map: g =>
+          val neighbors = numbers.filter(g.neighborOf(_))
+          if neighbors.length == 2 then neighbors(0).value * neighbors(1).value
+          else 0
+      .sum
+      .toString
 end part2
