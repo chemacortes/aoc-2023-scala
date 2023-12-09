@@ -11,7 +11,7 @@ import scala.util.matching.Regex.Match
   println(s"The solution is ${part2(loadInput())}")
 
 //def loadInput(): String = loadFileSync(s"$currentDir/../input/day00")
-def loadInput(): String = loadFileSync(s"$currentDir/../input/day03")
+def loadInput(): String = loadFileSync(s"$currentDir/../input/day03.txt")
 
 case class Coord(x: Int, y: Int):
     def withIn(start: Coord, end: Coord) =

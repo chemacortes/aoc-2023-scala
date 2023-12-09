@@ -12,7 +12,7 @@ import inputs.Input.loadFileSync
 @main def part2b: Unit =
   println(s"The solution is ${part2b(loadInput())}")
 
-def loadInput(): String = loadFileSync(s"$currentDir/../input/day01")
+def loadInput(): String = loadFileSync(s"$currentDir/../input/day01.txt")
 
 def part1(input: String): String =
 

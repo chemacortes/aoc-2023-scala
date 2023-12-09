@@ -9,7 +9,7 @@ import inputs.Input.loadFileSync
 @main def part2: Unit =
   println(s"The solution is ${part2(loadInput())}")
 
-def loadInput(): String = loadFileSync(s"$currentDir/../input/day02")
+def loadInput(): String = loadFileSync(s"$currentDir/../input/day02.txt")
 
 case class CubeSet(red: Int, green: Int, blue: Int)
 

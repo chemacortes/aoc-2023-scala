@@ -9,7 +9,7 @@ import inputs.Input.loadFileSync
 @main def part2: Unit =
   println(s"The solution is ${part2(loadInput())}")
 
-def loadInput(): String = loadFileSync(s"$currentDir/../input/day04")
+def loadInput(): String = loadFileSync(s"$currentDir/../input/day04.txt")
 
 def getNumbers(s: String) =
   """\d{1,2}""".r.findAllIn(s).map(_.toInt).toList
