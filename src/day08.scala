@@ -16,7 +16,7 @@ type Dirs = LazyList[Char]
 
 final case class Node(left: Tag, right: Tag)
 
-def dirs(directions:String): LazyList[Char] =
+def dirs(directions: String): LazyList[Char] =
   LazyList.continually(directions.view).flatten
 
 def parseMap(input: String): (Dirs, Map[Tag, Node]) =
@@ -37,21 +37,51 @@ def followDir(
 )(tag: Tag, directions: Dirs, steps: Long): Long =
   if tag == "ZZZ" then steps
   else
-      directions.head match
-          case 'L' =>
-            followDir(nodes)(nodes(tag).left, directions.tail, steps + 1)
-          case 'R' =>
-            followDir(nodes)(nodes(tag).right, directions.tail, steps + 1)
-          case _ =>
-            throw new Exception("Exception thrown from func")
+      val newTag =
+        directions.head match
+            case 'L' => nodes(tag).left
+            case 'R' => nodes(tag).right
+
+      followDir(nodes)(newTag, directions.tail, steps + 1)
 
 def part1(input: String): String =
-  val (directions,nodes) = parseMap(input)
+    val (directions, nodes) = parseMap(input)
 
-  followDir(nodes)("AAA",directions,0).toString
+    followDir(nodes)("AAA", directions, 0).toString
 
 end part1
 
+def followDir2(
+    nodes: Map[Tag, Node]
+)(tag: Tag, directions: Dirs, steps: Long): Long =
+  if tag.endsWith("Z") then steps
+  else
+      val newTag =
+        directions.head match
+            case 'L' => nodes(tag).left
+            case 'R' => nodes(tag).right
+
+      followDir2(nodes)(newTag, directions.tail, steps + 1)
+
 def part2(input: String): String =
-  ???
+
+    def lcm(a: Long, b: Long): Long =
+      a * b / gcd(a, b)
+
+    def gcd(a: Long, b: Long): Long =
+      if b == 0 then a else gcd(b, a % b)
+
+    val (directions, nodes) = parseMap(input)
+    val starts: List[Tag] =
+      nodes.keys
+        .filter: tag =>
+            tag.endsWith("A")
+        .toList
+
+    starts
+      .map: tag =>
+          followDir2(nodes)(tag, directions, 0)
+      .reduce(lcm)
+      .toString
+
 end part2
