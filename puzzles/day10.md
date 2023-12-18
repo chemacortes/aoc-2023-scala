@@ -16,14 +16,14 @@ Scanning the area, you discover that the entire field you're standing on is <spa
 
 The pipes are arranged in a two-dimensional grid of _tiles_:
 
-*   `|` is a _vertical pipe_ connecting north and south.
-*   `-` is a _horizontal pipe_ connecting east and west.
-*   `L` is a _90-degree bend_ connecting north and east.
-*   `J` is a _90-degree bend_ connecting north and west.
-*   `7` is a _90-degree bend_ connecting south and west.
-*   `F` is a _90-degree bend_ connecting south and east.
-*   `.` is _ground_; there is no pipe in this tile.
-*   `S` is the _starting position_ of the animal; there is a pipe on this tile, but your sketch doesn't show what shape the pipe has.
+* `|` is a _vertical pipe_ connecting north and south.
+* `-` is a _horizontal pipe_ connecting east and west.
+* `L` is a _90-degree bend_ connecting north and east.
+* `J` is a _90-degree bend_ connecting north and west.
+* `7` is a _90-degree bend_ connecting south and west.
+* `F` is a _90-degree bend_ connecting south and east.
+* `.` is _ground_; there is no pipe in this tile.
+* `S` is the _starting position_ of the animal; there is a pipe on this tile, but your sketch doesn't show what shape the pipe has.
 
 Based on the acoustics of the animal's scurrying, you're confident the pipe that contains the animal is _one large, continuous loop_.
 
@@ -34,7 +34,6 @@ For example, here is a square loop of pipe:
     .|.|.
     .L-J.
     .....
-    
 
 If the animal had entered this loop in the northwest corner, the sketch would instead look like this:
 
@@ -43,7 +42,6 @@ If the animal had entered this loop in the northwest corner, the sketch would in
     .|.|.
     .L-J.
     .....
-    
 
 In the above diagram, the `S` tile is still a 90-degree `F` bend: you can tell because of how the adjacent pipes connect to it.
 
@@ -54,7 +52,6 @@ Unfortunately, there are also many pipes that _aren't connected to the loop_! Th
     L|7||
     -L-J|
     L|-JF
-    
 
 In the above diagram, you can still figure out which pipes form the main loop: they're the ones connected to `S`, pipes those pipes connect to, pipes _those_ pipes connect to, and so on. Every pipe in the main loop connects to its two neighbors (including `S`, which will have exactly two pipes connecting to it, and which is assumed to connect back to those two pipes).
 
@@ -65,7 +62,6 @@ Here is a sketch that contains a slightly more complex main loop:
     SJ.L7
     |F--J
     LJ...
-    
 
 Here's the same example sketch with the extra, non-main-loop pipe tiles also shown:
 
@@ -74,7 +70,6 @@ Here's the same example sketch with the extra, non-main-loop pipe tiles also sho
     SJLL7
     |F--J
     LJ.LJ
-    
 
 If you want to _get out ahead of the animal_, you should find the tile in the loop that is _farthest_ from the starting position. Because the animal is in the pipe, it doesn't make sense to measure this by direct distance. Instead, you need to find the tile that would take the longest number of steps _along the loop_ to reach from the starting point - regardless of which way around the loop the animal went.
 
@@ -85,7 +80,6 @@ In the first example with the square loop:
     .|.|.
     .L-J.
     .....
-    
 
 You can count the distance each tile in the loop is from the starting point like this:
 
@@ -94,7 +88,6 @@ You can count the distance each tile in the loop is from the starting point like
     .1.3.
     .234.
     .....
-    
 
 In this example, the farthest point from the start is _`4`_ steps away.
 
@@ -105,7 +98,6 @@ Here's the more complex loop again:
     SJ.L7
     |F--J
     LJ...
-    
 
 Here are the distances for each tile on that loop:
 
@@ -114,7 +106,6 @@ Here are the distances for each tile on that loop:
     01.78
     14567
     23...
-    
 
 Find the single giant loop starting at `S`. _How many steps along the loop does it take to get from the starting position to the point farthest from the starting position?_
 
@@ -133,7 +124,6 @@ To determine whether it's even worth taking the time to search for such a nest, 
     .|..|.|..|.
     .L--J.L--J.
     ...........
-    
 
 The above loop encloses merely _four tiles_ - the two pairs of `.` in the southwest and southeast (marked `I` below). The middle `.` tiles (marked `O` below) are _not_ in the loop. Here is the same loop again with those regions marked:
 
@@ -146,7 +136,6 @@ The above loop encloses merely _four tiles_ - the two pairs of `.` in the southw
     .|II|O|II|.
     .L--JOL--J.
     .....O.....
-    
 
 In fact, there doesn't even need to be a full tile path to the outside for tiles to count as outside the loop - squeezing between pipes is also allowed! Here, `I` is still within the loop and `O` is still outside the loop:
 
@@ -159,7 +148,6 @@ In fact, there doesn't even need to be a full tile path to the outside for tiles
     .|II||II|.
     .L--JL--J.
     ..........
-    
 
 In both of the above examples, _`4`_ tiles are enclosed by the loop.
 
@@ -175,7 +163,6 @@ Here's a larger example:
     .....|FJLJ|FJ|F7|.LJ
     ....FJL-7.||.||||...
     ....L---J.LJ.LJLJ...
-    
 
 The above sketch has many random bits of ground, some of which are in the loop (`I`) and some of which are outside it (`O`):
 
@@ -189,7 +176,6 @@ The above sketch has many random bits of ground, some of which are in the loop (
     OOOOO|FJLJ|FJ|F7|OLJ
     OOOOFJL-7O||O||||OOO
     OOOOL---JOLJOLJLJOOO
-    
 
 In this larger example, _`8`_ tiles are enclosed by the loop.
 
@@ -205,7 +191,6 @@ Any tile that isn't part of the main loop can count as being enclosed by the loo
     7-L-JL7||F7|L7F-7F7|
     L.L7LFJ|||||FJL7||LJ
     L7JLJL-JLJLJL--JLJ.L
-    
 
 Here are just the tiles that are _enclosed by the loop_ marked with `I`:
 
@@ -219,7 +204,6 @@ Here are just the tiles that are _enclosed by the loop_ marked with `I`:
     7-L-JL7||F7|L7F-7F7|
     L.L7LFJ|||||FJL7||LJ
     L7JLJL-JLJLJL--JLJ.L
-    
 
 In this last example, _`10`_ tiles are enclosed by the loop.
 
