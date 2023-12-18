@@ -1,4 +1,4 @@
-package day11
+package day11b
 
 import inputs.Input.loadFileSync
 import locations.Directory.currentDir
