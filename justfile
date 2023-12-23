@@ -40,7 +40,7 @@ default:
 # running again and timing the optimized quiz
 @solution day part: (ensure day part)
   echo "\nrunning {{day}}.{{part}}\n"
-  time -f "\nTiming: {{format}}" ./{{day}}.{{part}}
+  (export SCALANATIVE_MIN_SIZE=1g && time -f "\nTiming: {{format}}" ./{{day}}.{{part}})
 
 # clean scala-build files of a quiz
 @clean:
@@ -49,4 +49,4 @@ default:
 
 # clean all scala-build files and executables (day01.part1,...)
 @clean-all: (clean)
-  find . -maxdepth 2 -name day??.part[12] -delete
+  find . -maxdepth 2 -name "day??.part[12]" -delete
