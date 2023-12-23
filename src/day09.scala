@@ -38,6 +38,7 @@ object History:
           line
             .split(" ")
             .map(_.toInt)
+            .toIndexedSeq
 
     def loadHistories(input: String)(using rules: Rules) =
       input.linesIterator

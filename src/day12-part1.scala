@@ -38,7 +38,7 @@ case class Condition(pattern: String, groups: Seq[Int]):
 object Condition:
     def parse(s: String) =
         val Array(pat, g) = s.split(" ")
-        Condition(pat, g.split(",").map(_.toInt))
+        Condition(pat, g.split(",").map(_.toInt).toIndexedSeq)
 
 def part1(input: String): String =
   input.linesIterator

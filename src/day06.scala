@@ -43,9 +43,10 @@ def parseRecords2(input: String): (Long, Long) =
     (time, distance)
 
 def calculation(time: Long, distance: Long) =
+    val timeDouble = time.toDouble
     val record = distance + 1
-    val z1 = (time - Math.sqrt(time * time - 4 * record)) / 2
-    val z2 = (time + Math.sqrt(time * time - 4 * record)) / 2
+    val z1 = (timeDouble - Math.sqrt(timeDouble * timeDouble - 4 * record)) / 2
+    val z2 = (timeDouble + Math.sqrt(timeDouble * timeDouble - 4 * record)) / 2
 
     (z2.floor - z1.ceil + 1).toLong
 
