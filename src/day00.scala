@@ -1,7 +1,7 @@
 package day00
 
-import locations.Directory.currentDir
 import inputs.Input.loadFileSync
+import locations.Directory.currentDir
 
 @main def part1: Unit =
   println(s"The solution is ${part1(loadInput())}")
@@ -9,7 +9,7 @@ import inputs.Input.loadFileSync
 @main def part2: Unit =
   println(s"The solution is ${part2(loadInput())}")
 
-def loadInput(): String = loadFileSync(s"$currentDir/../input/day00")
+def loadInput(): String = loadFileSync(s"$currentDir/../input/day00.txt")
 
 def part1(input: String): String =
   ???
