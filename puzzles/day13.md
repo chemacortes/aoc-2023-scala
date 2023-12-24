@@ -33,7 +33,6 @@ For example:
     #####.##.
     ..##..###
     #....#..#
-    
 
 To find the reflection in each pattern, you need to find a perfect reflection across either a horizontal line between two rows or across a vertical line between two columns.
 
@@ -50,7 +49,6 @@ In the first pattern, the reflection is across a vertical line between two colum
     #.#.##.#.
         ><   
     123456789
-    
 
 In this pattern, the line of reflection is the vertical line between columns 5 and 6. Because the vertical line is not perfectly in the middle of the pattern, part of the pattern (column 1) has nowhere to reflect onto and can be ignored; every other column has a reflected column within the pattern and must match exactly: column 2 matches column 9, column 3 matches 8, 4 matches 7, and 5 matches 6.
 
@@ -63,7 +61,6 @@ The second pattern reflects across a horizontal line instead:
     5^#####.##.^5
     6 ..##..### 6
     7 #....#..# 7
-    
 
 This pattern reflects across the horizontal line between rows 4 and 5. Row 1 would reflect with a hypothetical row 8, but since that's not in the pattern, row 1 doesn't need to match anything. The remaining rows match: row 2 matches row 7, row 3 matches row 6, and row 4 matches row 5.
 
@@ -96,7 +93,6 @@ Here's the above example again:
     #####.##.
     ..##..###
     #....#..#
-    
 
 The first pattern's smudge is in the top-left corner. If the top-left `#` were instead `.`, it would have a different, horizontal line of reflection:
 
@@ -107,7 +103,6 @@ The first pattern's smudge is in the top-left corner. If the top-left `#` were i
     5 ..#.##.#. 5
     6 ..##..##. 6
     7 #.#.##.#. 7
-    
 
 With the smudge in the top-left corner repaired, a new horizontal line of reflection between rows 3 and 4 now exists. Row 7 has no corresponding reflected row and can be ignored, but every other row matches exactly: row 1 matches row 6, row 2 matches row 5, and row 3 matches row 4.
 
@@ -120,7 +115,6 @@ In the second pattern, the smudge can be fixed by changing the fifth symbol on r
     5 #####.##. 5
     6 ..##..### 6
     7 #....#..# 7
-    
 
 Now, the pattern has a different horizontal line of reflection between rows 1 and 2.
 
