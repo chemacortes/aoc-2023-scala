@@ -13,59 +13,57 @@ import scala.annotation.tailrec
 
 def loadInput(): String = loadFileSync(s"$currentDir/../input/day14.txt")
 
-// Lighter version of Grid class
-type GridT = Seq[String]
+// Using opaque types to group all extension methods
+object Grids:
 
-extension (grid: GridT)
+    opaque type Grid = Seq[String]
 
-    def spin: GridT =
-      grid.transpose
-        .map(_.mkString.reverse)
+    object Grid:
+        def parse(input: String): Grid =
+          input.linesIterator.toSeq.spin
 
-    def tilt: GridT =
-      grid
-        .map: line =>
-            line
-              .split("#", -1)
-              .map(_.mkString.sorted)
-              .mkString("#")
+    extension (grid: Grid)
 
-    @tailrec
-    def cycle(n: Int = 4): GridT =
-      if n <= 0 then grid else grid.tilt.spin.cycle(n - 1)
+        def spin: Grid =
+          grid.transpose
+            .map(_.mkString.reverse)
 
-object Grid:
-    def parse(input: String): Grid =
-      Grid(input.linesIterator.toSeq.spin)
+        def tilt: Grid =
+          grid
+            .map: line =>
+                line
+                  .split("#", -1)
+                  .map(_.mkString.sorted)
+                  .mkString("#")
 
-case class Grid(grid: GridT):
+        @tailrec
+        def cycle(n: Int = 4): Grid =
+          if n <= 0 then grid else grid.tilt.spin.cycle(n - 1)
 
-    override def toString(): String = grid.mkString("\n")
-    def spin = Grid(grid.spin)
-    def tilt = Grid(grid.tilt)
-    def cycle(n: Int = 4) = Grid(grid.cycle(n))
-
-    def load: Int =
-      grid
-        .map: line =>
-            line.zipWithIndex
-              .collect:
-                  case (c, i) if c == 'O' => i + 1
-              .sum
-        .sum
+        def load: Int =
+          grid
+            .map: line =>
+                line.zipWithIndex
+                  .collect:
+                      case (c, i) if c == 'O' => i + 1
+                  .sum
+            .sum
 
 def part1(input: String): String =
+    import Grids.*
+
     val grid = Grid.parse(input)
     grid.tilt.load.toString
 end part1
 
 def part2(input: String): String =
+    import Grids.*
 
     val CYCLES = 1_000_000_000
 
     val grid = Grid.parse(input)
-    val states: LazyList[GridT] =
-      LazyList.iterate(grid.grid)(_.cycle())
+    val states: LazyList[Grid] =
+      LazyList.iterate(grid)(_.cycle())
 
     // Detecting same state --> cycle
     val (first, last) =
@@ -78,6 +76,6 @@ def part2(input: String): String =
     val rest = (CYCLES - first) % loopsize
     val final_state = states(first + rest)
 
-    Grid(final_state).load.toString
+    final_state.load.toString
 
 end part2
